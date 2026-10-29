@@ -26,16 +26,16 @@ Decision:
 
 ### Prompt 2 — Test review
 
-[Replace this section with the exact prompt actually submitted to the AI tool.]
+Review the Java course enrollment and waitlist implementation against the assessment requirements. Examine the enrollment and waitlist tests, identify cases that do not exercise the intended service behavior, and recommend focused corrections. Pay particular attention to FIFO promotion, prerequisite eligibility, duplicate enrollment, invalid drop operations, and preservation of state invariants.
 
 Purpose:
 Review the enrollment and waitlist tests against acceptance criteria AC1–AC7, identify tests that do not exercise the intended behavior, and propose focused corrections.
 
 AI suggestion:
-[Record the relevant response summary.]
+The FIFO test modified a list returned by getWaitlistOrder(). Since the method returns a copy, modifying the returned list does not update the service's internal queue. The test should create waitlist entries through the service API, drop an enrolled student, and verify the resulting enrollment and waitlist state.
 
 Decision:
-[State which suggestions were accepted, modified, or rejected and why.]
+Accepted the recommendation to validate FIFO promotion through observable service behavior instead of modifying a returned list. The implementation and test changes must be verified against the submitted repository before being described as completed.
 
 Files affected:
 - CourseOfferingService.java
@@ -57,18 +57,16 @@ The service and tests are reviewed for:
 ## 4. Independent verification evidence
 
 Environment:
-- Java version: [record `java -version` output]
-- Maven version: [record `mvn -version` output]
-
+- Java version: OpenJDK, version 25.0.4, as previously reported during the assessment setup.
+- Maven version: Maven installation was initially unavailable in the terminal. A successful build was subsequently reported, but the exact Maven version and test summary are not available in this record
 Commands:
 1. `mvn clean test`
-2. [Record any additional command actually executed.]
 
 Test results:
-[Paste the actual Maven test summary and test count.]
+The project was reported as built successfully. 
 
 Manual review:
-[Record the specific code paths and invariants inspected.]
+The review focused on enrollment and drop state transitions, FIFO waitlist promotion, prerequisite eligibility, duplicate operations, and synchronization of shared state.
 
 ## 5. Limitations
 
